@@ -18,6 +18,8 @@
     <ItemGroup>
         <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
         <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+        <_ContentIncludedByDefault Remove="Components\Dialogs\AddPersonDynamicFormDialog.razor" />
+        <_ContentIncludedByDefault Remove="Components\Dialogs\AddPersonStaticDialog.razor" />
     </ItemGroup>
 
     <ItemGroup>

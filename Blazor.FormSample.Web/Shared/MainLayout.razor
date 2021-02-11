@@ -1,7 +1,11 @@
 ﻿@inherits LayoutComponentBase
 
 <MudThemeProvider Theme="_currentTheme"/>
-<MudDialogProvider/>
+<MudDialogProvider FullWidth="true"
+                   MaxWidth="MaxWidth.Medium"
+                   CloseButton="true"
+                   DisableBackdropClick="true"
+                   Position="DialogPosition.Center"/>
 <MudSnackbarProvider/>
 <MudLayout>
     <MudAppBar Elevation="1">
@@ -17,13 +21,6 @@
             <MudIconButton Icon="@Icons.Material.BrightnessLow" Color="Color.Inherit" OnClick="DarkMode"/>
         }
     </MudAppBar>
-    <MudDrawer @bind-Open="@_open" Clipped="true" Elevation="1">
-        <MudNavMenu>
-            <MudNavLink Match="NavLinkMatch.All" Href="/">Persons</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/form">Forms</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/dynamic-form">Dynamic Forms</MudNavLink>
-        </MudNavMenu>
-    </MudDrawer>
     <MudMainContent Class="pt-16 px-16">
         <MudContainer Class="mt-6">
             @Body

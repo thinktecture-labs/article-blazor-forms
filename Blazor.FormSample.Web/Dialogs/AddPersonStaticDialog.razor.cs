@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 
-namespace Blazor.FormSample.Web.Components.Dialogs
+namespace Blazor.FormSample.Web.Dialogs
 {
     public partial class AddPersonStaticDialog
     {
@@ -29,7 +29,7 @@ namespace Blazor.FormSample.Web.Components.Dialogs
             if (!context.GetValidationMessages().Any())
             {
                 Console.WriteLine($"{_person.Name} {_person.Email} {_person.BirthDate}");
-                await _personService.AddPerson(_person);
+                await _personService.AddPersonAsync(_person);
                 _person = new Person();
                 MudDialog.Close(DialogResult.Ok(true));
             }

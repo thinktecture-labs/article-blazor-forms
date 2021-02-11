@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,10 +15,10 @@ namespace Blazor.FormSample.Web.Services
 
         public PersonService(IIndexedDbFactory dbFactory)
         {
-            _dbFactory = dbFactory ?? throw new System.ArgumentNullException(nameof(dbFactory));
+            _dbFactory = dbFactory ?? throw new ArgumentNullException(nameof(dbFactory));
         }
 
-        public async Task AddPerson(Person person)
+        public async Task AddPersonAsync(Person person)
         {
             using (var db = await _dbFactory.Create<PeopleDbContext>())
             {
@@ -28,12 +29,26 @@ namespace Blazor.FormSample.Web.Services
             _persons.Add(person);
         }
 
+        public async Task UpdatePersonAsync(Person person)
+        {
+            using var db = await _dbFactory.Create<PeopleDbContext>();
+            var currentPerson = db.People.FirstOrDefault(p => p.Id == person.Id);
+            if (currentPerson != null)
+            {
+                currentPerson.Job = person.Job;
+                currentPerson.BirthDate = person.BirthDate;
+                currentPerson.PictureUrl = person.PictureUrl;
+                await db.SaveChanges();
+                _persons = db.People.ToList();
+            }
+        }
+
         public void DeletePerson(Person person)
         {
             _persons.Remove(person);
         }
 
-        public async Task<List<Person>> Persons()
+        public async Task<List<Person>> PersonsAsync()
         {
             if (!_persons.Any())
             {

@@ -10,7 +10,7 @@ using MudBlazor;
 
 namespace Blazor.FormSample.Web.Services
 {
-    public class FormsService : IFormsService
+    public class MudFormsService : IFormsService
     {
         public RenderFragment CreateComponent<T>(T data, EditContext context) => builder =>
         {
@@ -24,7 +24,7 @@ namespace Blazor.FormSample.Web.Services
                     var displayLabel =
                         (DisplayAttribute) prp.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault();
                     // Get the initial property value
-                    var propInfo = typeof(Person).GetProperty(prp.Name);
+                    var propInfoValue = typeof(Person).GetProperty(prp.Name);
                     // Create an expression to set the ValueExpression-attribute.
                     var constant = Expression.Constant(data, typeof(Person));
                     var exp = Expression.Property(constant, prp.Name);
@@ -35,17 +35,16 @@ namespace Blazor.FormSample.Web.Services
                         case DataType.PhoneNumber:
                         case DataType.MultilineText:
                         {
-                            builder.OpenComponent(0, typeof(InputText));
-                            // Create the handler for ValueChanged. I use reflection to the value.
+                            builder.OpenComponent(0, typeof(MudTextField<string>));
                             builder.AddAttribute(3, "ValueChanged",
                                 RuntimeHelpers.TypeCheck(EventCallback.Factory.Create(this,
                                     EventCallback.Factory.CreateInferred(this,
-                                        _value => 
+                                        __value =>
                                         {
-                                            propInfo.SetValue(data, _value);
+                                            propInfoValue.SetValue(data, __value);
                                             context.NotifyFieldChanged(new FieldIdentifier(data, prp.Name));
                                         },
-                                        (string) propInfo.GetValue(data)))));
+                                        (string) propInfoValue.GetValue(data)))));
                             builder.AddAttribute(4, "ValueExpression", Expression.Lambda<Func<string>>(exp));
                             if (attrList.DataType == DataType.MultilineText)
                                 builder.AddAttribute(5, "Multiline", true);
@@ -57,14 +56,15 @@ namespace Blazor.FormSample.Web.Services
                             break;
                         }
                         case DataType.Date:
-                            builder.OpenComponent(0, typeof(InputDate<DateTime?>));
-                            var dateValue = propInfo.GetValue(data);
+                            builder.OpenComponent(0, typeof(MudDatePicker));
+                            var dateValue = propInfoValue.GetValue(data);
+                            builder.AddAttribute(1, "Date", dateValue);
                             builder.AddAttribute(2, "Style", "date-picker-test");
-                            builder.AddAttribute(3, "ValueChanged",
+                            builder.AddAttribute(3, "DateChanged",
                                 RuntimeHelpers.TypeCheck(EventCallback.Factory.Create(this,
                                     EventCallback.Factory.CreateInferred(this,
-                                        __value => propInfo.SetValue(data, __value),
-                                        (DateTime?) propInfo.GetValue(data)))));
+                                        __value => propInfoValue.SetValue(data, __value),
+                                        (DateTime?) propInfoValue.GetValue(data)))));
                             builder.AddAttribute(4, "ValueExpression", Expression.Lambda<Func<DateTime?>>(exp));
                             break;
                         default:
@@ -74,8 +74,11 @@ namespace Blazor.FormSample.Web.Services
 
                     try
                     {
-                        var defaultValue = propInfo.GetValue(data);
-                        builder.AddAttribute(1, "Value", defaultValue);
+                        var defaultValue = propInfoValue.GetValue(data);
+                        if (attrList.DataType != DataType.Date)
+                        {
+                            builder.AddAttribute(1, "Value", defaultValue);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -83,7 +86,7 @@ namespace Blazor.FormSample.Web.Services
                     }
                     finally
                     {
-                        builder.AddAttribute(6, "Placeholder", displayLabel?.Description ?? String.Empty);
+                        builder.AddAttribute(6, "Label", displayLabel?.Description ?? String.Empty);
                         builder.CloseComponent();
                     }
                 }

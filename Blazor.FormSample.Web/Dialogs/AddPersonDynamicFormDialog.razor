@@ -1,0 +1,19 @@
+<MudDialog>
+    <DialogContent>
+        <div>
+            <EditForm @ref="PersonForm" Model="@_person" OnValidSubmit="async (context) => await Submit(context)">
+                @if (!_update)
+                {
+                    <FluentValidator></FluentValidator>
+                }
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                @CreateForm()
+                <ValidationSummary></ValidationSummary>
+                <div class="align-right">
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Text" Color="Color.Primary">Save</MudButton>
+                    <MudButton ButtonType="ButtonType.Reset" Variant="Variant.Text" Color="Color.Secondary">Reset</MudButton>
+                </div>
+            </EditForm>
+        </div>
+    </DialogContent>
+</MudDialog>

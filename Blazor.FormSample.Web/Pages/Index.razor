@@ -7,7 +7,7 @@
         {
             @foreach (var p in _people)
             {
-                <PersonInfoCard Person="@p"></PersonInfoCard>
+                <PersonInfoCard Person="@p" PersonClicked="@((e) => OpenDialog(true, p))"></PersonInfoCard>
             }
         }
     </div>

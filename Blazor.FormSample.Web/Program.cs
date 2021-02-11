@@ -20,7 +20,8 @@ namespace Blazor.FormSample.Web
 
             builder.Services.AddScoped(
                 sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
-            builder.Services.AddScoped<FormsService>();
+            // builder.Services.AddScoped<IFormsService, MudFormsService>(); 
+            builder.Services.AddScoped<IFormsService, FormsService>();
             builder.Services.AddScoped<PersonService>();
             builder.Services.AddScoped<IIndexedDbFactory, IndexedDbFactory>();
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();

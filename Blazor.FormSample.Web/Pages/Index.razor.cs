@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Blazor.FormSample.Web.Components.Dialogs;
+using Blazor.FormSample.Web.Dialogs;
 using Blazor.FormSample.Web.Models;
 using Blazor.FormSample.Web.Services;
 using Microsoft.AspNetCore.Components;
@@ -19,15 +19,18 @@ namespace Blazor.FormSample.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            _people = await _personService.Persons();
+            _people = await _personService.PersonsAsync();
             StateHasChanged();
             await base.OnInitializedAsync();
         }
 
-        private async Task OpenDialog(bool dynamic)
+        private async Task OpenDialog(bool dynamic, Person person = null)
         {
             var result = dynamic
-                ? await _dialogService.Show<AddPersonDynamicFormDialog>("Dynamic Form").Result
+                ? await _dialogService.Show<AddPersonDynamicFormDialog>("Dynamic Form", new DialogParameters
+                {
+                    ["Person"] = person
+                }).Result
                 : await _dialogService.Show<AddPersonStaticDialog>("Dynamic Form").Result;
         }
 
