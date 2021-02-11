@@ -1,0 +1,17 @@
+﻿.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .person-list {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}
+
+.btn-action {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+}

@@ -1,0 +1,24 @@
+<div class="our-team">
+    <div class="picture">
+        @if (String.IsNullOrWhiteSpace(Person.PictureUrl))
+        {
+            <img class="img-fluid" src="/assets/default_person_img.jpg">
+        }
+        else
+        {
+            <img class="img-fluid" src="@Person.PictureUrl">
+        }
+    </div>
+    <div class="team-content">
+        <h3 class="name">@Person?.Name</h3>
+        <h4 class="title">@Person?.Job</h4>
+    </div>
+    @if (!String.IsNullOrWhiteSpace(Person.Email))
+    {
+        <ul class="social">
+            <li>
+                <a href="mailto:@Person.Email" aria-hidden="true">@Person.Email</a>
+            </li>
+        </ul>
+    }
+</div>

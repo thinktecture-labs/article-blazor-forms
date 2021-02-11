@@ -1,0 +1,32 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="_currentTheme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
+        <MudText Typo="Typo.h5">Blazor WebAssembly Forms</MudText>
+        <MudAppBarSpacer/>
+        @if (_isDarkEnabled)
+        {
+            <MudIconButton Icon="@Icons.Material.WbSunny" Color="Color.Inherit" OnClick="DarkMode"/>
+        }
+        else
+        {
+            <MudIconButton Icon="@Icons.Material.BrightnessLow" Color="Color.Inherit" OnClick="DarkMode"/>
+        }
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_open" Clipped="true" Elevation="1">
+        <MudNavMenu>
+            <MudNavLink Match="NavLinkMatch.All" Href="/">Persons</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/form">Forms</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/dynamic-form">Dynamic Forms</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent Class="pt-16 px-16">
+        <MudContainer Class="mt-6">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
