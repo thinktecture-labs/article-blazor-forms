@@ -5,20 +5,22 @@ namespace Blazor.FormSample.Web.Models
 {
     public class Person
     {
-        [Key]
-        public long Id { get; set; }
+        [Key] public long Id { get; set; }
 
         [Required]
         [Display(Description = "Username")]
+        [StringLength(100, ErrorMessage = "Name is too long")]
         [DataType(DataType.Text)]
         public string Name { get; set; }
 
-        [Required]
         [Display(Description = "Job")]
         [DataType(DataType.Text)]
         public string Job { get; set; }
 
-        [Required]
+        [DataType("MultiSelect")]
+        [Display(Description = "Skills")]
+        public string Skill { get; set; }
+
         [Display(Description = "E-Mail")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

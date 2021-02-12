@@ -40,7 +40,7 @@ namespace Blazor.FormSample.Web.Services
                             builder.AddAttribute(3, "ValueChanged",
                                 RuntimeHelpers.TypeCheck(EventCallback.Factory.Create(this,
                                     EventCallback.Factory.CreateInferred(this,
-                                        _value => 
+                                        _value =>
                                         {
                                             propInfo.SetValue(data, _value);
                                             context.NotifyFieldChanged(new FieldIdentifier(data, prp.Name));
@@ -69,7 +69,7 @@ namespace Blazor.FormSample.Web.Services
                             break;
                         default:
                             Console.WriteLine($"No Component for DataType: {attrList?.DataType}");
-                            break;
+                            continue;
                     }
 
                     try

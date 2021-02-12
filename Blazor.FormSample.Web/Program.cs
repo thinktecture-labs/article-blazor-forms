@@ -20,14 +20,23 @@ namespace Blazor.FormSample.Web
 
             builder.Services.AddScoped(
                 sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
-            // builder.Services.AddScoped<IFormsService, MudFormsService>(); 
-            builder.Services.AddScoped<IFormsService, FormsService>();
+            builder.Services.AddScoped<IFormsService, MudFormsService>();
+            // builder.Services.AddScoped<IFormsService, FormsService>();
             builder.Services.AddScoped<PersonService>();
             builder.Services.AddScoped<IIndexedDbFactory, IndexedDbFactory>();
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
             builder.Services.AddMudBlazorDialog();
-            builder.Services.AddMudBlazorSnackbar();
             builder.Services.AddMudBlazorResizeListener();
+            builder.Services.AddMudBlazorSnackbar(config =>
+            {
+                config.PositionClass = Defaults.Classes.Position.TopCenter;
+                config.PreventDuplicates = false;
+                config.NewestOnTop = false;
+                config.ShowCloseIcon = false;
+                config.VisibleStateDuration = 1000;
+                config.HideTransitionDuration = 500;
+                config.ShowTransitionDuration = 500;
+            });
 
             await builder.Build().RunAsync();
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Dialogs;
@@ -14,6 +15,7 @@ namespace Blazor.FormSample.Web.Pages
         [Inject] private NavigationManager _navigationManager { get; set; }
 
         [Inject] private IDialogService _dialogService { get; set; }
+        [Inject] private ISnackbar _snackbar { get; set; }
 
         private List<Person> _people;
 
@@ -32,6 +34,17 @@ namespace Blazor.FormSample.Web.Pages
                     ["Person"] = person
                 }).Result
                 : await _dialogService.Show<AddPersonStaticDialog>("Dynamic Form").Result;
+
+            var name = String.IsNullOrWhiteSpace(person?.Name) ? "Person" : person.Name;
+            if (result?.Data != null && (bool) result.Data)
+            {
+                var action = person == null ? "angelegt" : "aktuallisiert";
+                _snackbar.Add($"{name} wurde erfolgreich {action}.", Severity.Success);
+            }
+            else
+            {
+                _snackbar.Add($"Speichern von {name} ist fehlgeschlagen.", Severity.Error);
+            }
         }
 
         private void OpenDynamicForm()

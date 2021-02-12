@@ -1,4 +1,4 @@
-<div class="our-team" @onclick="PersonClicked">
+<div class="our-team">
     <div class="picture">
         @if (String.IsNullOrWhiteSpace(Person.PictureUrl))
         {
@@ -9,7 +9,7 @@
             <img class="img-fluid" src="@Person.PictureUrl">
         }
     </div>
-    <div class="team-content">
+    <div class="team-content" @onclick="PersonClicked">
         <h3 class="name">@Person?.Name</h3>
         <h4 class="title">@Person?.Job</h4>
     </div>

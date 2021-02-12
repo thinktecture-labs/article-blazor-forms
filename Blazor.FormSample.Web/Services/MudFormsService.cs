@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -59,13 +60,38 @@ namespace Blazor.FormSample.Web.Services
                             builder.OpenComponent(0, typeof(MudDatePicker));
                             var dateValue = propInfoValue.GetValue(data);
                             builder.AddAttribute(1, "Date", dateValue);
-                            builder.AddAttribute(2, "Style", "date-picker-test");
                             builder.AddAttribute(3, "DateChanged",
                                 RuntimeHelpers.TypeCheck(EventCallback.Factory.Create(this,
                                     EventCallback.Factory.CreateInferred(this,
                                         __value => propInfoValue.SetValue(data, __value),
                                         (DateTime?) propInfoValue.GetValue(data)))));
                             builder.AddAttribute(4, "ValueExpression", Expression.Lambda<Func<DateTime?>>(exp));
+                            break;
+                        case DataType.Custom:
+                            var options = new HashSet<string>
+                            {
+                                "Blazor",
+                                "Angular",
+                                ".NET Core"
+                            };
+                            builder.OpenComponent(0, typeof(MudSelect<string>));
+                            var selectValues = propInfoValue.GetValue(data);
+                            builder.AddAttribute(1, "Value", selectValues);
+                            builder.AddAttribute(2, "SelectedValues", options);
+                            builder.AddAttribute(4, "ChildContent",
+                                (RenderFragment) ((builder2) =>
+                                {
+                                    foreach (var option in options)
+                                    {
+                                        builder2.AddMarkupContent(5, "\r\n    ");
+                                        builder2.OpenComponent<MudSelectItem<string>>(6);
+                                        builder2.AddAttribute(1, "Value", option);
+                                        builder2.AddAttribute(2, "InnerHTML", option);
+                                        builder2.CloseComponent();
+                                        builder2.AddMarkupContent(9, "\r\n");
+                                    }
+                                }));
+                            builder.AddAttribute(4, "ValueExpression", Expression.Lambda<Func<string>>(exp));
                             break;
                         default:
                             Console.WriteLine($"No Component for DataType: {attrList?.DataType}");
