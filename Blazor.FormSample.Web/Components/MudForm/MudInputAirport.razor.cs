@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Blazor.FormSample.Web.Models;
 using MudBlazor;
 
-namespace Blazor.FormSample.Web.Components
+namespace Blazor.FormSample.Web.Components.MudForm
 {
     public partial class MudInputAirport
     {

@@ -12,7 +12,6 @@ namespace Blazor.FormSample.Web.Components
 {
     public partial class VacationBooking
     {
-        [Inject] private HttpClient Http { get; set; }
         [Inject] private BookingService BookingService { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Parameter] public VacationBookingDto Model { get; set; }

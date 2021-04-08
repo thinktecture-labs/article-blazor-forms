@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Models;
 using Blazor.FormSample.Web.Services;
@@ -9,7 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 
-namespace Blazor.FormSample.Web.Components
+namespace Blazor.FormSample.Web.Components.MudForm
 {
     public partial class MudVacationBooking
     {

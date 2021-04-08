@@ -8,6 +8,6 @@ namespace Blazor.FormSample.Web.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public List<Airport> Airports { get; set; }
+        public List<Airport> Airports { get; set; } = new();
     }
 }

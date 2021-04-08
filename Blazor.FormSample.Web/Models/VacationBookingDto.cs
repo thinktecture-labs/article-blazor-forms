@@ -38,7 +38,15 @@ namespace Blazor.FormSample.Web.Models
 
     public class Person
     {
+        [Required]
+        [Display(Description = "Vorname")]
+        [StringLength(100, ErrorMessage = "Der Name sollte nicht mehr als 100 zeichen haben.")]
+
         public string FirstName { get; set; }
+        
+        [Required]
+        [Display(Description = "Nachname")]
+        [StringLength(100, ErrorMessage = "Der Nachname sollte nicht mehr als 100 zeichen haben.")]
         public string LastName { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Street { get; set; }

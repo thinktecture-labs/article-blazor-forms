@@ -9,14 +9,14 @@ namespace Blazor.FormSample.Web.Pages
         private string Content { get; set; } = new('x', 10000);
 
         private bool _enablePerformance;
-        private readonly List<Airport> Airports = new();
-
+        private Country Country;
 
         protected override void OnInitialized()
         {
+            Country = new Country();
             for (int i = 1; i <= 250; i++)
             {
-                Airports.Add(new Airport
+                Country.Airports.Add(new Airport
                 {
                     Id = Guid.NewGuid(),
                     Name = $"Airport {i}"
