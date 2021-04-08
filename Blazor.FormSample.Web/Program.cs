@@ -22,9 +22,10 @@ namespace Blazor.FormSample.Web
                 sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
             builder.Services.AddScoped<IFormsService, MudFormsService>();
             // builder.Services.AddScoped<IFormsService, FormsService>();
-            builder.Services.AddScoped<PersonService>();
+            builder.Services.AddScoped<BookingService>();
             builder.Services.AddScoped<IIndexedDbFactory, IndexedDbFactory>();
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+            builder.Services.AddMudServices();
             builder.Services.AddMudBlazorDialog();
             builder.Services.AddMudBlazorResizeListener();
             builder.Services.AddMudBlazorSnackbar(config =>

@@ -1,0 +1,38 @@
+@if (_bookings?.Count > 0)
+{
+    <div class="container">
+        <MudTable Items="@_bookings" Striped="true" Breakpoint="Breakpoint.Sm">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Geplante Flüge</MudText>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Von</MudTh>
+                <MudTh>Nach</MudTh>
+                <MudTh>Vom</MudTh>
+                <MudTh>Bis</MudTh>
+                <MudTh>Erwachsene</MudTh>
+                <MudTh>Kinder</MudTh>
+                <MudTh>Reiseklasse</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="From">@context.FromAirport.State (@context.FromAirport.ShortName)</MudTd>
+                <MudTd DataLabel="To">@context.ToAirport.State (@context.ToAirport.ShortName)</MudTd>
+                <MudTd DataLabel="Start">@context.StartVacationDate.GetValueOrDefault().ToShortDateString()</MudTd>
+                <MudTd DataLabel="End">@context.EndVacationDate.GetValueOrDefault().ToShortDateString()</MudTd>
+                <MudTd DataLabel="Adults">@context.Adults.ToString()</MudTd>
+                <MudTd DataLabel="Kids">@context.KidsAboveThreeYears.ToString()</MudTd>
+                <MudTd DataLabel="TravelClass">@context.TravelClass.ToString()</MudTd>
+                <MudTd DataLabel="Delete">
+                    <MudIconButton Icon="@Icons.Filled.Delete" OnClick="() => DeleteBookingAsync(context)"></MudIconButton>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </div>
+}
+else
+{
+    <MudPaper Class="pa-12 ma-2" Elevation="5">
+        <MudText>Es wurden noch keine Flüge gebucht. Fangen Sie doch gleich damit an.</MudText>
+    </MudPaper>
+}

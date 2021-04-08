@@ -1,0 +1,55 @@
+<EditForm Model="@Model" OnSubmit="context => Submit(context)">
+    <DataAnnotationsValidator/>
+    <FluentValidator/>
+    <MudTabs @ref="_tabs" Elevation="2" Rounded="true" Centered="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+        <MudTabPanel Text="Persönliche Informationen">
+            <MudTextField Class="mb-4" Label="Vorname" @bind-Value="Model.Person.FirstName"/>
+            <MudTextField Class="mb-4" Label="Nachname" @bind-Value="Model.Person.LastName"/>
+            <MudDatePicker Class="mb-4" Label="Geburtsdatum " @bind-Value="Model.Person.BirthDate"/>
+            <MudTextField Class="mb-4" Label="Straße, Nr." @bind-Value="Model.Person.Street"></MudTextField>
+            <MudTextField Class="mb-4" Label="Stadt" @bind-Value="Model.Person.City"></MudTextField>
+            <div class="d-flex flex-row-reverse py-2 px-1">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(1)">Weiter</MudButton>
+            </div>
+        </MudTabPanel>
+        <MudTabPanel Text="Flugdaten">
+            <MudDatePicker Class="mb-4" Label="Abreise" @bind-Value="Model.StartVacationDate" MinDate="DateTime.Now"/>
+            <MudCheckBox Label="Nur Hinflug" @bind-Checked="@Model.OnlyOutboundFlight"/>
+            <MudDatePicker Class="mb-4" Label="Rückreise" @bind-Value="Model.EndVacationDate" MinDate="Model.StartVacationDate" MaxDate="DateTime.Now.AddYears(1)"/>
+            <MudInputAirport @bind-Value="Model.FromAirport" CountryLabel="Von: " AirportLabel="Anreise Flughafen: "/>
+            <MudInputAirport @bind-Value="Model.ToAirport" CountryLabel="Nach: " AirportLabel="Abreise Flughafen: "/>
+            <MudSelect Class="mb-4" Label="Reiseklasse: " @bind-Value="Model.TravelClass">
+                @foreach (TravelClass? item in Enum.GetValues(typeof(TravelClass)))
+                {
+                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                }
+            </MudSelect>
+            <div class="d-flex flex-row-reverse py-2 px-1">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(2)">Weiter</MudButton>
+                <MudButton Class="mr-4" Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(0)">Zurück</MudButton>
+            </div>
+        </MudTabPanel>
+        <MudTabPanel Text="Reisende">
+            <MudSlider Class="mb-4" @bind-Value="Model.Adults" Min="1" Max="4">Erwachsene: @Model.Adults.ToString()</MudSlider>
+            <MudSlider Class="mb-4" @bind-Value="Model.KidsAboveThreeYears" Min="0" Max="4">Kinder über 3 Jahre: @Model.KidsAboveThreeYears.ToString()</MudSlider>
+            <MudSlider Class="mb-4" @bind-Value="Model.KidsBelowThreeYears" Min="0" Max="4">Kinder bis zu 3 Jahre: @Model.KidsBelowThreeYears.ToString()</MudSlider>
+
+            <MudCheckBox Label="Mit Essen?" @bind-Checked="@Model.WithFood"/>
+            @if (Model.WithFood)
+            {
+                <MudSelect Class="mb-4 mt-1" Label="Was für Essen hätten Sie gerne?" @bind-Value="Model.Food">
+                    @foreach (FoodVariation? item in Enum.GetValues(typeof(FoodVariation)))
+                    {
+                        <MudSelectItem Value="@item">@item</MudSelectItem>
+                    }
+                </MudSelect>
+            }
+            <div class="d-flex flex-row-reverse py-2 px-1">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(1)">Zurück</MudButton>
+            </div>
+        </MudTabPanel>
+    </MudTabs>
+    <div class="btn-action">
+        <MudFab ButtonType="ButtonType.Submit" Color="Color.Primary" Icon="@Icons.Filled.Save"/>
+    </div>
+</EditForm>

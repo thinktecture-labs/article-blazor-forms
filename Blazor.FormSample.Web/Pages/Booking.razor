@@ -1,0 +1,14 @@
+@page "/Booking/{Id}"
+
+<MudSwitch Class="mb-4" @bind-Checked="@UseMudBlazor" Label="Use UI Framework (MudBlazor): " Color="Color.Primary" />
+
+<div class="booking-card">
+    @if (UseMudBlazor)
+    {
+        <MudVacationBooking Model="@_vacationBooking"></MudVacationBooking>
+    }
+    else
+    {
+        <VacationBooking Model="@_vacationBooking"></VacationBooking>
+    }
+</div>

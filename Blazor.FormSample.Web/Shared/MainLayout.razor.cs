@@ -1,12 +1,22 @@
+using System.Threading.Tasks;
+using Blazor.FormSample.Web.Services;
+using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
 namespace Blazor.FormSample.Web.Shared
 {
     public partial class MainLayout
     {
-        private bool _open;
         private bool _isDarkEnabled;
         private MudTheme _currentTheme = new();
+        private bool _open = false;
+        private bool preserveOpenState = false;
+        private Breakpoint breakpoint = Breakpoint.Lg;
+
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+        }
 
         private readonly MudTheme _defaultTheme = new()
         {

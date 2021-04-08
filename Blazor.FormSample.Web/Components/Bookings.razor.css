@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .person-list {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+}

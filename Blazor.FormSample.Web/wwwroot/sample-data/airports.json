@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Germany",
+    "airports": [
+      {
+        "city": "Frankfurt",
+        "state": "Hessen",
+        "name": "Frankfurt International Airport",
+        "shortName": "FRA"
+      },
+      {
+        "city": "Berlin",
+        "state": "Brandenburg",
+        "name": "Berlin-Schonefeld International Airport",
+        "shortName": "SXF"
+      },
+      {
+        "city": "Hamburg",
+        "state": "Hamburg",
+        "name": "Hamburg Airport",
+        "shortName": "HAM"
+      }
+    ]
+  },
+  {
+    "name": "United States",
+    "airports": [
+      {
+        "city": "San Francisco Bay Area",
+        "state": "California",
+        "name": "San Francisco Bay Area - All Airports",
+        "shortName": "QBA"
+      },
+      {
+        "city": "Urbana",
+        "state": "Illinois",
+        "name": "Frasca Field",
+        "shortName": "C16"
+      },
+      {
+        "city": "Seattle",
+        "state": "Washington",
+        "name": "Seattle-Tacoma International Airport",
+        "shortName": "SEA"
+      }
+    ]
+  },
+  {
+    "name": "France",
+    "airports": [
+      {
+        "city": "Paris",
+        "state": "Île-de-France",
+        "name": "Charles de Gaulle International Airport",
+        "shortName": "CDG"
+      },
+      {
+        "city": "Villacoublay",
+        "state": "Île-de-France",
+        "name": "Vélizy – Villacoublay Air Base",
+        "shortName": "VIY"
+      },
+      {
+        "city": "Colmar",
+        "state": "Alsace",
+        "name": "Colmar - Houssen Airport",
+        "shortName": "CMR"
+      }
+    ]
+  }
+]
+

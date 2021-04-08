@@ -1,0 +1,37 @@
+@inherits InputAirportBase
+
+@if (Countries != null)
+{
+    <label>
+        @CountryLabel
+        <InputSelect @bind-Value="Country">
+            <option value=""></option>
+            @foreach (var country in Countries)
+            {
+                <option @key="country.Name" value="@country.Name">@country.Name</option>
+            }
+        </InputSelect>
+    </label>
+    @if (!LoadingAirports && Airports?.Count > 0)
+    {
+        <label>
+            @AirportLabel
+            <InputSelect ValueExpression="@(() => Value.Id)" Value="Value.Id"
+                         ValueChanged="@((Guid id) => CurrentValue = Airports.FirstOrDefault(c => c.Id == id))">
+                <option value=""></option>
+                @foreach (var airport in Airports)
+                {
+                    <option @key="airport.Id" value="@airport.Id">@airport.Name (@airport.ShortName)</option>
+                }
+            </InputSelect>
+        </label>
+    }
+    else if (LoadingAirports)
+    {
+        <Spinner></Spinner>
+    }
+}
+else
+{
+    <Spinner></Spinner>
+}

@@ -1,18 +1,7 @@
 ﻿@page "/"
 
-<div class="container">
-    <div class="person-list">
-        @if (_people != null)
-        {
-            @foreach (var p in _people)
-            {
-                <PersonInfoCard Person="@p" PersonClicked="@((e) => OpenDialog(true, p))"></PersonInfoCard>
-            }
-        }
-    </div>
-</div>
+<Bookings></Bookings>
 
 <div class="btn-action">
-    <MudFab Color="Color.Primary" Icon="@Icons.Material.Add" OnClick="async () => await OpenDialog(true)"/>
-    <MudFab Color="Color.Secondary" Icon="@Icons.Material.Add" OnClick="async () => await OpenDialog(false)"/>
+    <MudFab Color="Color.Primary" Icon="@Icons.Filled.Add" OnClick="AddNewBooking"/>
 </div>

@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Models;
 using Blazor.FormSample.Web.Services;
@@ -7,31 +9,30 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 
-namespace Blazor.FormSample.Web.Dialogs
+namespace Blazor.FormSample.Web.Components
 {
-    public partial class AddPersonStaticDialog
+    public partial class MudVacationBooking
     {
-        [Inject] private PersonService _personService { get; set; }
-        [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-        private Person _person;
+        [Inject] private BookingService BookingService { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Parameter] public VacationBookingDto Model { get; set; }
+        
+        private MudTabs _tabs;
 
-        protected override void OnInitialized()
+        private void SwitchTab(int index)
         {
-            _person = new Person();
+            _tabs.ActivatePanel(index);
         }
 
         private async Task Submit(EditContext context)
         {
-            await Task.Delay(250);
             Console.WriteLine($"Form is valid: {context.Validate()}");
             Console.WriteLine($"Form is modified: {context.IsModified()}");
             Console.WriteLine($"Form is ValidationMessages: {String.Join(",", context.GetValidationMessages())}");
             if (!context.GetValidationMessages().Any())
             {
-                Console.WriteLine($"{_person.Name} {_person.Email} {_person.BirthDate}");
-                await _personService.AddPersonAsync(_person);
-                _person = new Person();
-                MudDialog.Close(DialogResult.Ok(true));
+                await BookingService.AddBookingAsync(Model);
+                NavigationManager.NavigateTo(NavigationManager.BaseUri);
             }
         }
     }

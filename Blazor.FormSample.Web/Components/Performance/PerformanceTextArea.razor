@@ -1,0 +1,22 @@
+@using Blazor.FormSample.Web.Utils
+
+@if (_enablePerformance)
+{
+    <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Power" OnClick="@(() => _enablePerformance = false)"/>
+}
+else
+{
+    <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.PowerOff" OnClick="@(() => _enablePerformance = true)"/>
+}
+
+@if (_enablePerformance)
+{
+    <InputTextArea type="text" Value="@Value" @onblur="StateHasChanged" 
+                   ValueChanged="EventUtil.AsNonRenderingEventHandler<string>(OnValueChanged)"
+                   ValueExpression="() => Value"
+                   style="height: auto; min-height: 500px; width: 700px;"></InputTextArea>
+}
+else
+{
+    <InputTextArea type="text" @bind-Value="Value" style="height: auto; min-height: 500px; width: 700px;"></InputTextArea>
+}

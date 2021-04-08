@@ -1,0 +1,33 @@
+@inherits InputAirportBase
+
+@if (Countries != null)
+{
+    <MudSelect @ref="_elementReference" T="string" 
+                Class="mb-4" Label="@CountryLabel" Value="Country" ValueChanged="LoadAirports">
+        @foreach (var country in Countries)
+        {
+            <MudSelectItem T="string" @key="country.Name" Value="country.Name">@country.Name</MudSelectItem>
+        }
+    </MudSelect>
+    @if (!LoadingAirports && Airports?.Count > 0)
+    {
+        <MudSelect Class="mb-4"
+                   Label="@AirportLabel"
+                   Value="Value"
+                   ValueChanged="@((Airport airport) => CurrentValue = airport)"
+                   ToStringFunc="@_convertAirportToString">
+            @foreach (Airport airport in Airports)
+            {
+                <MudSelectItem @key="airport.Name" Value="@airport">@airport.Name</MudSelectItem>
+            }
+        </MudSelect>
+    }
+    else if (LoadingAirports)
+    {
+        <MudSkeleton Class="mb-4" />
+    }
+}
+else
+{
+    <MudSkeleton Class="mb-4" />
+}

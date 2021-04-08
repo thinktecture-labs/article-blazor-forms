@@ -7,20 +7,33 @@
                    DisableBackdropClick="true"
                    Position="DialogPosition.Center"/>
 <MudSnackbarProvider/>
+
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
+        <MudIconButton Icon="@Icons.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
         <MudText Typo="Typo.h5">Blazor WebAssembly Forms</MudText>
         <MudAppBarSpacer/>
         @if (_isDarkEnabled)
         {
-            <MudIconButton Icon="@Icons.Material.WbSunny" Color="Color.Inherit" OnClick="DarkMode"/>
+            <MudIconButton Icon="@Icons.Filled.WbSunny" Color="Color.Inherit" OnClick="DarkMode"/>
         }
         else
         {
-            <MudIconButton Icon="@Icons.Material.BrightnessLow" Color="Color.Inherit" OnClick="DarkMode"/>
+            <MudIconButton Icon="@Icons.Filled.BrightnessLow" Color="Color.Inherit" OnClick="DarkMode"/>
         }
     </MudAppBar>
+    <MudDrawer @bind-Open="@_open" Breakpoint="@breakpoint" Elevation="1" PreserveOpenState="@preserveOpenState">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Forms in Action</MudText>
+        </MudDrawerHeader>
+        <MudPaper Width="250px" Class="py-3" Square="true">
+            <MudNavMenu>
+                <MudNavLink Href="" Icon="@Icons.Filled.Dashboard">Bookings</MudNavLink>
+                <MudNavLink Href="/performance" Icon="@Icons.Filled.Storage">Performance</MudNavLink>
+                <MudNavLink Href="/about" Icon="@Icons.Filled.Info" IconColor="Color.Success">About</MudNavLink>
+            </MudNavMenu>
+        </MudPaper>
+    </MudDrawer>
     <MudMainContent Class="pt-16 px-16">
         <MudContainer Class="mt-6">
             @Body

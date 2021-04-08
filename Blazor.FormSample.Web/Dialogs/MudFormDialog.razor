@@ -1,0 +1,13 @@
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 600px; overflow-y: scroll">
+            <Virtualize Items="@Airports" Context="airport">
+                <MudTextField T="string" @key="airport.Name" @bind-Value="@airport.Name" Label="Input"/>
+            </Virtualize>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

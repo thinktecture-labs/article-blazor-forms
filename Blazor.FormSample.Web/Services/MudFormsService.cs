@@ -25,9 +25,9 @@ namespace Blazor.FormSample.Web.Services
                     var displayLabel =
                         (DisplayAttribute) prp.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault();
                     // Get the initial property value
-                    var propInfoValue = typeof(Person).GetProperty(prp.Name);
+                    var propInfoValue = typeof(T).GetProperty(prp.Name);
                     // Create an expression to set the ValueExpression-attribute.
-                    var constant = Expression.Constant(data, typeof(Person));
+                    var constant = Expression.Constant(data, typeof(T));
                     var exp = Expression.Property(constant, prp.Name);
                     switch (attrList.DataType)
                     {

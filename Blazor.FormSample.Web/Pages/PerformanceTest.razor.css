@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.wrapper .test {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.wrapper .test h3 {
+    margin-bottom: 12px;
+}

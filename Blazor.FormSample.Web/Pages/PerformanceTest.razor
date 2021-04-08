@@ -1,0 +1,45 @@
+@page "/performance"
+
+<div class="btn-action">
+    @if (_enablePerformance)
+    {
+        <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Power" OnClick="@(() => _enablePerformance = false)"/>
+    }
+    else
+    {
+        <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.PowerOff" OnClick="@(() => _enablePerformance = true)"/>
+    }
+</div>
+
+<div class="wrapper">
+    @*<div class="test">
+        <h3>1. Basic input performance</h3>
+        <EditForm @ref="_edit" Model="Content">
+            <PerformanceTextArea Value="@Content"></PerformanceTextArea>
+        </EditForm>
+    </div>*@
+    @if (_enablePerformance)
+    {
+        <div class="test">
+            <MudContainer Style="max-height: 100vh; overflow-y: scroll">
+                <Virtualize Items="@Airports" OverscanCount="10" Context="airport">
+                    <ItemContent>
+                        <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Input"/>
+                    </ItemContent>
+                    <Placeholder>
+                        <Spinner></Spinner>
+                    </Placeholder>
+                </Virtualize>
+            </MudContainer>
+        </div>
+    }
+    else
+    {
+        <div class="test">
+            @foreach (var airport in Airports)
+            {
+                <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Input"/>
+            }
+        </div>
+    }
+</div>
