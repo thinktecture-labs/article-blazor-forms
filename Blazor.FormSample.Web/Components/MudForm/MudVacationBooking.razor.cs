@@ -14,8 +14,24 @@ namespace Blazor.FormSample.Web.Components.MudForm
         [Inject] private BookingService BookingService { get; set; }
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Parameter] public VacationBookingDto Model { get; set; }
-        
+
         private MudTabs _tabs;
+        private EditForm _editForm;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            if (_editForm?.EditContext != null)
+            {
+                _editForm.EditContext.OnFieldChanged += (sender, args) =>
+                {
+                    if (args.FieldIdentifier.FieldName == nameof(VacationBookingDto.OnlyOutboundFlight))
+                    {
+                        Model.EndVacationDate = null;
+                    }
+                };
+            }
+        }
 
         private void SwitchTab(int index)
         {

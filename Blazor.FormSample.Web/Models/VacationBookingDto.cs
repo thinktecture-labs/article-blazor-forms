@@ -23,12 +23,9 @@ namespace Blazor.FormSample.Web.Models
         public DateTime? EndVacationDate { get; set; }
 
         public TravelClass? TravelClass { get; set; } = Models.TravelClass.Economy;
-        public FoodVariation? Food { get; set; } = null;
-
         public int Adults { get; set; } = 1;
         public int KidsAboveThreeYears { get; set; }
         public int KidsBelowThreeYears { get; set; }
-        public bool WithFood { get; set; }
 
         public VacationBookingDto()
         {
@@ -43,11 +40,12 @@ namespace Blazor.FormSample.Web.Models
         [StringLength(100, ErrorMessage = "Der Name sollte nicht mehr als 100 zeichen haben.")]
 
         public string FirstName { get; set; }
-        
+
         [Required]
         [Display(Description = "Nachname")]
         [StringLength(100, ErrorMessage = "Der Nachname sollte nicht mehr als 100 zeichen haben.")]
         public string LastName { get; set; }
+
         public DateTime? BirthDate { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
@@ -61,13 +59,5 @@ namespace Blazor.FormSample.Web.Models
         PremiumEconomy,
         Business,
         First
-    }
-
-    public enum FoodVariation
-    {
-        Meat,
-        Fish,
-        Vegitarian,
-        Vegan
     }
 }
