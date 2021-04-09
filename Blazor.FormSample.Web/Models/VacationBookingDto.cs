@@ -7,7 +7,23 @@ namespace Blazor.FormSample.Web.Models
     {
         [Key] public Guid Id { get; set; }
 
-        public Person Person { get; set; } = new();
+        [Required(ErrorMessage = "Bitte geben Sie einen Vornamen an.")]
+        [Display(Description = "Vorname")]
+        [StringLength(100, ErrorMessage = "Der Name sollte nicht mehr als 100 zeichen haben.")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Bitte geben Sie einen Nachnamen an.")]
+        [Display(Description = "Nachname")]
+        [StringLength(100, ErrorMessage = "Der Nachname sollte nicht mehr als 100 zeichen haben.")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Bitte geben Sie ihr Geburtsdatum an.")]
+        public DateTime? BirthDate { get; set; }
+
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string PhoneNumber { get; set; }
+
 
         [Required(ErrorMessage = "Bitte geben Sie einen Start Flughafen an.")]
         public Airport FromAirport { get; set; } = new();
@@ -31,25 +47,6 @@ namespace Blazor.FormSample.Web.Models
         {
             Id = Guid.NewGuid();
         }
-    }
-
-    public class Person
-    {
-        [Required]
-        [Display(Description = "Vorname")]
-        [StringLength(100, ErrorMessage = "Der Name sollte nicht mehr als 100 zeichen haben.")]
-
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Description = "Nachname")]
-        [StringLength(100, ErrorMessage = "Der Nachname sollte nicht mehr als 100 zeichen haben.")]
-        public string LastName { get; set; }
-
-        public DateTime? BirthDate { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string PhoneNumber { get; set; }
     }
 
     // ToDo: Translate enums values in the UI

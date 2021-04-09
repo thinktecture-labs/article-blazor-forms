@@ -24,6 +24,12 @@ namespace Blazor.FormSample.Web.Validators
                 .NotEqual(TravelClass.Economy)
                 .When(booking => booking.Adults > 2)
                 .WithMessage("Wenn mehr als zwei Personen mitfliegen, muss die Reiseklasse min. Business sein");
+            RuleFor(booking => booking.FromAirport.Id)
+                .NotEqual(booking => booking.ToAirport.Id)
+                .WithMessage("Der Ablufhafen darf nicht der gleiche wie der Ankunfts Flughafen sein.");
+            RuleFor(booking => booking.ToAirport.Id)
+                .NotEqual(booking => booking.FromAirport.Id)
+                .WithMessage("Der Ablufhafen darf nicht der gleiche wie der Ankunfts Flughafen sein.");
         }
     }
 }

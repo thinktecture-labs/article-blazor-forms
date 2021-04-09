@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Models;
 using Blazor.FormSample.Web.Services;
@@ -14,7 +13,6 @@ namespace Blazor.FormSample.Web.Components
     {
         [Parameter] public string CountryLabel { get; set; }
         [Parameter] public string AirportLabel { get; set; }
-        [Parameter] public Expression<Func<Airport>> ValidationFor { get; set; }
         [Inject] private BookingService BookingService { get; set; }
 
         protected string Country;

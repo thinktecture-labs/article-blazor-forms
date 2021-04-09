@@ -1,17 +1,20 @@
 <div class="booking-card">
     <h1>Urlaub<span>Buchen wir einen Flug zusammen :-)</span></h1>
     <EditForm @ref="_editForm" Model="@Model" OnSubmit="context => Submit(context)">
-        <DataAnnotationsValidator/>
-        <FluentValidator/>
-        <ValidationSummary/>
+        <DataAnnotationsValidator />
+        <FluentValidator />
+        <ValidationSummary />
         <div class="section"><span>1</span>Persönliche Daten:</div>
         <div class="inner-wrap">
-            <label>Vorname: <InputText @bind-Value="Model.Person.FirstName"/></label>
-            <label>Nachname: <InputText @bind-Value="Model.Person.LastName"/></label>
-            <label>Geburtsdatum: <InputDate @bind-Value="Model.Person.BirthDate"/></label>
-            <label>Straße, Nr.: <InputText @bind-Value="Model.Person.Street"/></label>
-            <label>Stadt: <InputText @bind-Value="Model.Person.City"/></label>
-            <label>Telefon: <InputText @bind-Value="Model.Person.PhoneNumber"/></label>
+            <label>Vorname: <InputText id="firstName" @bind-Value="Model.FirstName" /></label>
+            <ValidationMessage For="() => Model.FirstName"/>
+            <label>Nachname: <InputText @bind-Value="Model.LastName"/></label>
+            <ValidationMessage For="() => Model.LastName"/>
+            <label>Geburtsdatum: <InputDate @bind-Value="Model.BirthDate"/></label>
+            <ValidationMessage For="() => Model.BirthDate"/>
+            <label>Straße, Nr.: <InputText @bind-Value="Model.Street"/></label>
+            <label>Stadt: <InputText @bind-Value="Model.City"/></label>
+            <label>Telefon: <InputText @bind-Value="Model.PhoneNumber"/></label>
         </div>
         <div class="section"><span>1</span>Reisedaten:</div>
         <div class="inner-wrap">
@@ -26,8 +29,10 @@
         </div>
         <div class="section"><span>2</span>Flugdaten:</div>
         <div class="inner-wrap">
-            <InputAirport @bind-Value="Model.FromAirport" CountryLabel="Von: " AirportLabel="Anreise Flughafen: "/>
-            <InputAirport @bind-Value="Model.ToAirport" CountryLabel="Nach: " AirportLabel="Abreise Flughafen: "/>
+            <InputAirport @bind-Value="Model.FromAirport" CountryLabel="Von: " AirportLabel="Anreise Flughafen: " />
+            <ValidationMessage For="() => Model.FromAirport" />
+            <InputAirport @bind-Value="Model.ToAirport" CountryLabel="Nach: " AirportLabel="Abreise Flughafen: " />
+            <ValidationMessage For="() => Model.ToAirport" />
         </div>
         <div class="section"><span>3</span>Reiseklasse:</div>
         <div class="inner-wrap">
@@ -38,6 +43,7 @@
                         <option>@value</option>
                     }
                 </InputSelect>
+                <ValidationMessage For="() => Model.TravelClass"/>
             </label>
         </div>
         <div class="section"><span>4</span>Reisende:</div>
@@ -56,7 +62,7 @@
             </label>
         </div>
         <div class="d-flex flex-row-reverse py-2 px-1">
-            <input type="submit" name="Absenden" disabled="@(!context.IsModified())"/>
+            <input type="submit" name="Absenden"/>
             <input class="mr-4" type="reset" name="Zurücksetzen"/>
         </div>
     </EditForm>
