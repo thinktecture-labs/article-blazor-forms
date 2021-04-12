@@ -3,19 +3,19 @@
 <div class="booking-card">
     <h1>Urlaub<span>Buchen wir einen Flug zusammen :-)</span></h1>
     <EditForm @ref="_editForm" Model="@Model" OnSubmit="context => Submit(context)">
-        <DataAnnotationsValidator/>
+        <ObjectGraphDataAnnotationsValidator/>
         <FluentValidator/>
         <div class="section"><span>1</span>Persönliche Daten:</div>
         <div class="inner-wrap">
-            <label>Vorname: <InputText id="firstName" @bind-Value="Model.FirstName"/></label>
-            <ValidationMessage For="() => Model.FirstName"/>
-            <label>Nachname: <InputText @bind-Value="Model.LastName"/></label>
-            <ValidationMessage For="() => Model.LastName"/>
-            <label>Geburtsdatum: <InputDate @bind-Value="Model.BirthDate"/></label>
-            <ValidationMessage For="() => Model.BirthDate"/>
-            <label>Straße, Nr.: <InputText @bind-Value="Model.Street"/></label>
-            <label>Stadt: <InputText @bind-Value="Model.City"/></label>
-            <label>Telefon: <InputText @bind-Value="Model.PhoneNumber"/></label>
+            <label>Vorname: <InputText id="firstName" @bind-Value="Model.Person.FirstName"/></label>
+            <ValidationMessage For="() => Model.Person.FirstName"/>
+            <label>Nachname: <InputText @bind-Value="Model.Person.LastName"/></label>
+            <ValidationMessage For="() => Model.Person.LastName"/>
+            <label>Geburtsdatum: <InputDate @bind-Value="Model.Person.BirthDate"/></label>
+            <ValidationMessage For="() => Model.Person.BirthDate"/>
+            <label>Straße, Nr.: <InputText @bind-Value="Model.Person.Street"/></label>
+            <label>Stadt: <InputText @bind-Value="Model.Person.City"/></label>
+            <label>Telefon: <InputText @bind-Value="Model.Person.PhoneNumber"/></label>
         </div>
         <div class="section"><span>1</span>Reisedaten:</div>
         <div class="inner-wrap">

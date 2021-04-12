@@ -1,23 +1,20 @@
 <EditForm @ref="_editForm" Model="@Model" OnSubmit="context => Submit(context)">
-    <DataAnnotationsValidator/>
+    <ObjectGraphDataAnnotationsValidator/>
     <FluentValidator/>
-    <MudTabs @ref="_tabs" Elevation="2" Rounded="true" Centered="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
-        <MudTabPanel Text="Persönliche Informationen">
-            <MudTextField Class="mb-4" Label="Vorname" @bind-Value="Model.FirstName" For="() => Model.FirstName"/>
-            <MudTextField Class="mb-4" Label="Nachname" @bind-Value="Model.LastName" For="() => Model.LastName"/>
-            <MudDatePicker Class="mb-4" Label="Geburtsdatum " @bind-Value="Model.BirthDate" For="() => Model.BirthDate"/>
-            <MudTextField Class="mb-4" Label="Straße, Nr." @bind-Value="Model.Street"></MudTextField>
-            <MudTextField Class="mb-4" Label="Stadt" @bind-Value="Model.City"></MudTextField>
-            <div class="d-flex flex-row-reverse py-2 px-1">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(1)">Weiter</MudButton>
-            </div>
-        </MudTabPanel>
-        <MudTabPanel Text="Flugdaten">
+    <MudExpansionPanels MultiExpansion="true">
+        <MudExpansionPanel Text="Persönliche Informationen">
+            <MudTextField Class="mb-4" Label="Vorname" @bind-Value="Model.Person.FirstName" For="() => Model.Person.FirstName"/>
+            <MudTextField Class="mb-4" Label="Nachname" @bind-Value="Model.Person.LastName" For="() => Model.Person.LastName"/>
+            <MudDatePicker Class="mb-4" Label="Geburtsdatum " @bind-Value="Model.Person.BirthDate" For="() => Model.Person.BirthDate"/>
+            <MudTextField Class="mb-4" Label="Straße, Nr." @bind-Value="Model.Person.Street"></MudTextField>
+            <MudTextField Class="mb-4" Label="Stadt" @bind-Value="Model.Person.City"></MudTextField>
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="Flugdaten">
             <MudDatePicker Class="mb-4" Label="Abreise" @bind-Value="Model.StartVacationDate" MinDate="DateTime.Now" For="() => Model.StartVacationDate"/>
             <MudCheckBox Label="Nur Hinflug" @bind-Checked="@Model.OnlyOutboundFlight"/>
             @if (!Model.OnlyOutboundFlight)
             {
-                <MudDatePicker Class="mb-4" Label="Rückreise" @bind-Value="Model.EndVacationDate" 
+                <MudDatePicker Class="mb-4" Label="Rückreise" @bind-Value="Model.EndVacationDate"
                                MinDate="Model.StartVacationDate" MaxDate="DateTime.Now.AddYears(1)"
                                For="() => Model.EndVacationDate"/>
             }
@@ -29,20 +26,13 @@
                     <MudSelectItem Value="@item">@item</MudSelectItem>
                 }
             </MudSelect>
-            <div class="d-flex flex-row-reverse py-2 px-1">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(2)">Weiter</MudButton>
-                <MudButton Class="mr-4" Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(0)">Zurück</MudButton>
-            </div>
-        </MudTabPanel>
-        <MudTabPanel Text="Reisende">
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="Reisende">
             <MudSlider Class="mb-4" @bind-Value="Model.Adults" Min="1" Max="4">Erwachsene: @Model.Adults.ToString()</MudSlider>
             <MudSlider Class="mb-4" @bind-Value="Model.KidsAboveThreeYears" Min="0" Max="4">Kinder über 3 Jahre: @Model.KidsAboveThreeYears.ToString()</MudSlider>
             <MudSlider Class="mb-4" @bind-Value="Model.KidsBelowThreeYears" Min="0" Max="4">Kinder bis zu 3 Jahre: @Model.KidsBelowThreeYears.ToString()</MudSlider>
-            <div class="d-flex flex-row-reverse py-2 px-1">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => SwitchTab(1)">Zurück</MudButton>
-            </div>
-        </MudTabPanel>
-    </MudTabs>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
     <div class="btn-action">
         <MudFab ButtonType="ButtonType.Submit" Color="Color.Primary" Icon="@Icons.Filled.Save"/>
     </div>

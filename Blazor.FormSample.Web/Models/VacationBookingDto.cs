@@ -8,20 +8,7 @@ namespace Blazor.FormSample.Web.Models
     {
         [Key] public Guid Id { get; set; }
 
-        [Required(ErrorMessageResourceName = "FirstNameRequired", ErrorMessageResourceType = typeof(Resource))]
-        [StringLength(100, ErrorMessageResourceName = "FirstNameLength", ErrorMessageResourceType = typeof(Resource))]
-        public string FirstName { get; set; }
-
-        [Required(ErrorMessageResourceName = "LastNameRequired", ErrorMessageResourceType = typeof(Resource))]
-        [StringLength(100, ErrorMessageResourceName = "LastNameLength", ErrorMessageResourceType = typeof(Resource))]
-        public string LastName { get; set; }
-
-        [Required(ErrorMessageResourceName = "BirthDateRequired", ErrorMessageResourceType = typeof(Resource))]
-        public DateTime? BirthDate { get; set; }
-
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string PhoneNumber { get; set; }
+        [ValidateComplexType] public Person Person { get; set; } = new();
 
         [Required(ErrorMessageResourceName = "AirportError", ErrorMessageResourceType = typeof(Resource))]
         public Airport FromAirport { get; set; } = new();
@@ -42,6 +29,24 @@ namespace Blazor.FormSample.Web.Models
         {
             Id = Guid.NewGuid();
         }
+    }
+
+    public class Person
+    {
+        [Required(ErrorMessageResourceName = "FirstNameRequired", ErrorMessageResourceType = typeof(Resource))]
+        [StringLength(100, ErrorMessageResourceName = "FirstNameLength", ErrorMessageResourceType = typeof(Resource))]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessageResourceName = "LastNameRequired", ErrorMessageResourceType = typeof(Resource))]
+        [StringLength(100, ErrorMessageResourceName = "LastNameLength", ErrorMessageResourceType = typeof(Resource))]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessageResourceName = "BirthDateRequired", ErrorMessageResourceType = typeof(Resource))]
+        public DateTime? BirthDate { get; set; }
+
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string PhoneNumber { get; set; }
     }
 
     // ToDo: Translate enums values in the UI

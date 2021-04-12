@@ -5,7 +5,6 @@ using Blazor.FormSample.Web.Models;
 using Blazor.FormSample.Web.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using MudBlazor;
 
 namespace Blazor.FormSample.Web.Components.MudForm
 {
@@ -15,7 +14,6 @@ namespace Blazor.FormSample.Web.Components.MudForm
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Parameter] public VacationBookingDto Model { get; set; }
 
-        private MudTabs _tabs;
         private EditForm _editForm;
 
         protected override void OnInitialized()
@@ -31,11 +29,6 @@ namespace Blazor.FormSample.Web.Components.MudForm
                     }
                 };
             }
-        }
-
-        private void SwitchTab(int index)
-        {
-            _tabs.ActivatePanel(index);
         }
 
         private async Task Submit(EditContext context)
