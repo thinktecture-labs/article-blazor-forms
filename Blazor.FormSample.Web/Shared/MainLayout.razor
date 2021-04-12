@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject IStringLocalizer<Resource> Localizer
 
 <MudThemeProvider Theme="_currentTheme"/>
 <MudDialogProvider FullWidth="true"
@@ -11,8 +12,14 @@
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
-        <MudText Typo="Typo.h5">Blazor WebAssembly Forms</MudText>
+        <MudText Typo="Typo.h5">Blazor @Localizer["Title"]</MudText>
         <MudAppBarSpacer/>
+        <MudMenu StartIcon="@Icons.Filled.Translate" EndIcon="@Icons.Filled.KeyboardArrowDown" Color="Color.Inherit" Label="@Culture.DisplayName">
+            @foreach (var culture in cultures)
+            {
+                <MudMenuItem OnClick="@(() => Culture = culture)">@culture</MudMenuItem>
+            }
+        </MudMenu>
         @if (_isDarkEnabled)
         {
             <MudIconButton Icon="@Icons.Filled.WbSunny" Color="Color.Inherit" OnClick="DarkMode"/>

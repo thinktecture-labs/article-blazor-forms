@@ -2,30 +2,42 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Accelist.FluentValidation.Blazor" Version="4.0.0" />
-        <PackageReference Include="FluentValidation" Version="9.5.0" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.0" />
-        <PackageReference Include="Johnjalani.Blazor.IndexedDB.WebAssembly" Version="1.1.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.2" PrivateAssets="all" />
-        <PackageReference Include="MudBlazor" Version="5.0.7" />
-        <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+        <PackageReference Include="Accelist.FluentValidation.Blazor" Version="4.0.0"/>
+        <PackageReference Include="FluentValidation" Version="9.5.0"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.0"/>
+        <PackageReference Include="Johnjalani.Blazor.IndexedDB.WebAssembly" Version="1.1.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.2" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.5"/>
+        <PackageReference Include="MudBlazor" Version="5.0.7"/>
+        <PackageReference Include="System.Net.Http.Json" Version="5.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Dialogs\AddPersonDynamicFormDialog.razor" />
-      <_ContentIncludedByDefault Remove="Dialogs\AddPersonStaticDialog.razor" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\FONT-LICENSE" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\font\css\open-iconic-bootstrap.min.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.eot" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.otf" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.ttf" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\font\fonts\open-iconic.woff" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\ICON-LICENSE" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\open-iconic\README.md" />
+        <EmbeddedResource Update="Shared\ResourceFiles\Resource.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Shared\ResourceFiles\Resource.de.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resource.de.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Shared\ResourceFiles\Resource.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resource.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Shared\ResourceFiles\Resource.de.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resource.de.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 </Project>

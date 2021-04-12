@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Services;
+using Blazor.FormSample.Web.Utils;
 using Blazor.IndexedDB.WebAssembly;
 using FluentValidation;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -20,6 +21,7 @@ namespace Blazor.FormSample.Web
 
             builder.Services.AddScoped(
                 sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
+            builder.Services.AddLocalization();
             builder.Services.AddScoped<IFormsService, MudFormsService>();
             // builder.Services.AddScoped<IFormsService, FormsService>();
             builder.Services.AddScoped<BookingService>();
@@ -39,7 +41,9 @@ namespace Blazor.FormSample.Web
                 config.ShowTransitionDuration = 500;
             });
 
-            await builder.Build().RunAsync();
+            var host = builder.Build();
+            await host.SetDefaultCulture();
+            await host.RunAsync();
         }
     }
 }

@@ -31,6 +31,10 @@
         text-overflow: ellipsis;
     }
 
+::deep .mud-button-text {
+    color: white;
+}
+
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
         display: none;

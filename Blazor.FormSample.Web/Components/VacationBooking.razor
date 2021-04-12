@@ -1,12 +1,13 @@
+@inject IStringLocalizer<Resource> Localizer
+
 <div class="booking-card">
     <h1>Urlaub<span>Buchen wir einen Flug zusammen :-)</span></h1>
     <EditForm @ref="_editForm" Model="@Model" OnSubmit="context => Submit(context)">
-        <DataAnnotationsValidator />
-        <FluentValidator />
-        <ValidationSummary />
+        <DataAnnotationsValidator/>
+        <FluentValidator/>
         <div class="section"><span>1</span>Persönliche Daten:</div>
         <div class="inner-wrap">
-            <label>Vorname: <InputText id="firstName" @bind-Value="Model.FirstName" /></label>
+            <label>Vorname: <InputText id="firstName" @bind-Value="Model.FirstName"/></label>
             <ValidationMessage For="() => Model.FirstName"/>
             <label>Nachname: <InputText @bind-Value="Model.LastName"/></label>
             <ValidationMessage For="() => Model.LastName"/>
@@ -29,10 +30,10 @@
         </div>
         <div class="section"><span>2</span>Flugdaten:</div>
         <div class="inner-wrap">
-            <InputAirport @bind-Value="Model.FromAirport" CountryLabel="Von: " AirportLabel="Anreise Flughafen: " />
-            <ValidationMessage For="() => Model.FromAirport" />
-            <InputAirport @bind-Value="Model.ToAirport" CountryLabel="Nach: " AirportLabel="Abreise Flughafen: " />
-            <ValidationMessage For="() => Model.ToAirport" />
+            <InputAirport @bind-Value="Model.FromAirport" CountryLabel="Von: " AirportLabel="Anreise Flughafen: "/>
+            <ValidationMessage For="() => Model.FromAirport"/>
+            <InputAirport @bind-Value="Model.ToAirport" CountryLabel="Nach: " AirportLabel="Abreise Flughafen: "/>
+            <ValidationMessage For="() => Model.ToAirport"/>
         </div>
         <div class="section"><span>3</span>Reiseklasse:</div>
         <div class="inner-wrap">

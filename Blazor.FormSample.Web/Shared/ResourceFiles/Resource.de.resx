@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Title" xml:space="preserve">
+        <value>Forms in Aktion</value>
+    </data>
+    <data name="StartDateError" xml:space="preserve">
+        <value>Das Datum muss in der Zukunft liegen.</value>
+    </data>
+    <data name="EndDateErrorOne" xml:space="preserve">
+        <value>Bitte geben Sie ein Abreise Datum an.</value>
+    </data>
+    <data name="EndDateErrorTwo" xml:space="preserve">
+        <value>Das Abreise Datum muss nach dem Startdatum liegen.</value>
+    </data>
+    <data name="TravelClassError" xml:space="preserve">
+        <value>Wenn mehr als zwei Personen mitfliegen, muss die Reiseklasse min. Business sein.</value>
+    </data>
+    <data name="AirportError" xml:space="preserve">
+        <value>Der Ablufhafen darf nicht der gleiche wie der Ankunfts Flughafen sein.</value>
+    </data>
+    <data name="FirstNameRequired" xml:space="preserve">
+        <value>Bitte geben Sie einen Vornamen an.</value>
+    </data>
+    <data name="LastNameRequired" xml:space="preserve">
+        <value>Bitte geben Sie einen Nachnamen an.</value>
+    </data>
+    <data name="BirthDateRequired" xml:space="preserve">
+        <value>Bitte geben Sie ihr Geburtsdatum an.</value>
+    </data>
+    <data name="FirstNameLength" xml:space="preserve">
+        <value>Der Vorname sollte nicht mehr als 100 zeichen haben.</value>
+    </data>
+    <data name="LastNameLength" xml:space="preserve">
+        <value>Der Vorname sollte nicht mehr als 100 zeichen haben.</value>
+    </data>
+</root>

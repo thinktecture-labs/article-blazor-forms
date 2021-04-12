@@ -1,6 +1,7 @@
+using System.Globalization;
 using System.Threading.Tasks;
-using Blazor.FormSample.Web.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 
 namespace Blazor.FormSample.Web.Shared
@@ -12,6 +13,29 @@ namespace Blazor.FormSample.Web.Shared
         private bool _open = false;
         private bool preserveOpenState = false;
         private Breakpoint breakpoint = Breakpoint.Lg;
+
+        private CultureInfo[] cultures = new[]
+        {
+            new CultureInfo("en-US"),
+            new CultureInfo("de-DE")
+        };
+
+        [Inject] public NavigationManager NavManager { get; set; }
+        [Inject] public IJSRuntime JSRuntime { get; set; }
+
+        public CultureInfo Culture
+        {
+            get => CultureInfo.CurrentCulture;
+            set
+            {
+                if (CultureInfo.CurrentCulture != value)
+                {
+                    var js = (IJSInProcessRuntime) JSRuntime;
+                    js.InvokeVoid("blazorCulture.set", value.Name);
+                    NavManager.NavigateTo(NavManager.Uri, forceLoad: true);
+                }
+            }
+        }
 
         protected override async Task OnInitializedAsync()
         {
@@ -52,7 +76,6 @@ namespace Blazor.FormSample.Web.Shared
                 ActionDisabledBackground = "rgba(255,255,255, 0.12)"
             }
         };
-
 
         protected override void OnInitialized()
         {

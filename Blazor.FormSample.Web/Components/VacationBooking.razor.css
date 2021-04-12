@@ -33,7 +33,10 @@
 .booking-card label {
     display: block;
     font: 13px Arial, Helvetica, sans-serif;
-    color: #888;
+    color: #888;    
+}
+
+.inner-wrap ::deep .validation-message {
     margin-bottom: 15px;
 }
 

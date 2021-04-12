@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Blazor.FormSample.Web.Shared.ResourceFiles;
 
 namespace Blazor.FormSample.Web.Models
 {
@@ -7,37 +8,31 @@ namespace Blazor.FormSample.Web.Models
     {
         [Key] public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "Bitte geben Sie einen Vornamen an.")]
-        [Display(Description = "Vorname")]
-        [StringLength(100, ErrorMessage = "Der Name sollte nicht mehr als 100 zeichen haben.")]
+        [Required(ErrorMessageResourceName = "FirstNameRequired", ErrorMessageResourceType = typeof(Resource))]
+        [StringLength(100, ErrorMessageResourceName = "FirstNameLength", ErrorMessageResourceType = typeof(Resource))]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Bitte geben Sie einen Nachnamen an.")]
-        [Display(Description = "Nachname")]
-        [StringLength(100, ErrorMessage = "Der Nachname sollte nicht mehr als 100 zeichen haben.")]
+        [Required(ErrorMessageResourceName = "LastNameRequired", ErrorMessageResourceType = typeof(Resource))]
+        [StringLength(100, ErrorMessageResourceName = "LastNameLength", ErrorMessageResourceType = typeof(Resource))]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Bitte geben Sie ihr Geburtsdatum an.")]
+        [Required(ErrorMessageResourceName = "BirthDateRequired", ErrorMessageResourceType = typeof(Resource))]
         public DateTime? BirthDate { get; set; }
 
         public string Street { get; set; }
         public string City { get; set; }
         public string PhoneNumber { get; set; }
 
-
-        [Required(ErrorMessage = "Bitte geben Sie einen Start Flughafen an.")]
+        [Required(ErrorMessageResourceName = "AirportError", ErrorMessageResourceType = typeof(Resource))]
         public Airport FromAirport { get; set; } = new();
 
         public bool OnlyOutboundFlight { get; set; }
-
-        [Required(ErrorMessage = "Bitte geben Sie einen Ziel Flughafen an.")]
         public Airport ToAirport { get; set; } = new();
 
-        [Required(ErrorMessage = "Bitte geben Sie ein Startdatum an.")]
+        [Required(ErrorMessageResourceName = "StartDateError", ErrorMessageResourceType = typeof(Resource))]
         public DateTime? StartVacationDate { get; set; }
 
         public DateTime? EndVacationDate { get; set; }
-
         public TravelClass? TravelClass { get; set; } = Models.TravelClass.Economy;
         public int Adults { get; set; } = 1;
         public int KidsAboveThreeYears { get; set; }

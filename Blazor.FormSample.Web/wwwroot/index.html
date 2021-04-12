@@ -14,7 +14,9 @@
 </head>
 
 <body>
-<div id="app"><div class="spinner"></div></div>
+<div id="app">
+    <div class="spinner"></div>
+</div>
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.
@@ -37,6 +39,11 @@
     window.addEventListener("unhandledrejection", function (promiseRejectionEvent) {
         reportError(promiseRejectionEvent.reason.message);
     });
+
+    window.blazorCulture = {
+        get: () => localStorage['BlazorCulture'],
+        set: (value) => localStorage['BlazorCulture'] = value
+    };
 </script>
 <script src="_framework/blazor.webassembly.js"></script>
 <script src="_content/MudBlazor/MudBlazor.min.js"></script>
