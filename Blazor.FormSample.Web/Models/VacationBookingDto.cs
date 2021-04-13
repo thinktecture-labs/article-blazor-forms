@@ -44,9 +44,9 @@ namespace Blazor.FormSample.Web.Models
         [Required(ErrorMessageResourceName = "BirthDateRequired", ErrorMessageResourceType = typeof(Resource))]
         public DateTime? BirthDate { get; set; }
 
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Street { get; set; };
+        public string City { get; set; };
+        public string PhoneNumber { get; set; };
     }
 
     // ToDo: Translate enums values in the UI

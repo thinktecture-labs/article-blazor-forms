@@ -41,7 +41,7 @@ namespace Blazor.FormSample.Web.Components
 
             Console.WriteLine($"FromAirport {Model.FromAirport.Name}");
             Console.WriteLine($"ToAirport {Model.ToAirport.Name}");
-            if (!context.GetValidationMessages().Any())
+            if (context.Validate())
             {
                 await BookingService.AddBookingAsync(Model);
                 NavigationManager.NavigateTo(NavigationManager.BaseUri);

@@ -1,5 +1,6 @@
 using System;
 using Blazor.FormSample.Web.Models;
+using Blazor.FormSample.Web.Services;
 using Blazor.FormSample.Web.Shared.ResourceFiles;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -8,8 +9,20 @@ namespace Blazor.FormSample.Web.Validators
 {
     public class VacationBookingValidator : AbstractValidator<VacationBookingDto>
     {
-        public VacationBookingValidator(IStringLocalizer<Resource> localizer)
+        public VacationBookingValidator(IStringLocalizer<Resource> localizer, BookingService bookingService)
         {
+            RuleFor(booking => booking.Person.FirstName)
+                .MustAsync(async (booking, name, token) =>
+                {
+                    var current = await bookingService.GetBookingAsync(booking.Id);
+                    if (current != null)
+                    {
+                        return true;
+                    }
+
+                    return !await bookingService.PersonAlreadyExists(name);
+
+                }).WithMessage("Die Person mit dem Namen hat bereits einen Flug gebucht.");
             RuleFor(booking => booking.StartVacationDate)
                 .GreaterThan(DateTime.Now)
                 .WithMessage(localizer.GetString("StartDateError"));

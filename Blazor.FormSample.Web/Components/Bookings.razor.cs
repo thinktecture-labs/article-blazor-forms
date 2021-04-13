@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Models;
@@ -9,7 +10,8 @@ namespace Blazor.FormSample.Web.Components
     public partial class Bookings
     {
         [Inject] private BookingService BookingService { get; set; }
-
+        [Inject] public NavigationManager NavigationManager { get; set; }
+        
         private List<VacationBookingDto> _bookings;
 
         protected override async Task OnInitializedAsync()
@@ -22,6 +24,11 @@ namespace Blazor.FormSample.Web.Components
         {
             await BookingService.DeleteBookingAsync(booking);
             _bookings.Remove(booking);
+        }
+
+        private void OpenBooking(Guid id)
+        {
+            NavigationManager.NavigateTo($"/booking/{id}");
         }
     }
 }

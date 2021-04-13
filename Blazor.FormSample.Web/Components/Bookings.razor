@@ -14,6 +14,7 @@
                 <MudTh>Kinder</MudTh>
                 <MudTh>Reiseklasse</MudTh>
                 <MudTh></MudTh>
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="From">@context.FromAirport.State (@context.FromAirport.ShortName)</MudTd>
@@ -25,6 +26,9 @@
                 <MudTd DataLabel="TravelClass">@context.TravelClass.ToString()</MudTd>
                 <MudTd DataLabel="Delete">
                     <MudIconButton Icon="@Icons.Filled.Delete" OnClick="() => DeleteBookingAsync(context)"></MudIconButton>
+                </MudTd>
+                <MudTd DataLabel="Edit">
+                    <MudIconButton Icon="@Icons.Filled.Edit" OnClick="() => OpenBooking(context.Id)"></MudIconButton>
                 </MudTd>
             </RowTemplate>
         </MudTable>

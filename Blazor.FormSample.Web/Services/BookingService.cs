@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Blazor.FormSample.Web.Database;
 using Blazor.FormSample.Web.Models;
@@ -28,7 +29,7 @@ namespace Blazor.FormSample.Web.Services
             {
                 return;
             }
-            
+
             var countries = await _httpClient.GetFromJsonAsync<Country[]>("sample-data/airports.json");
             if (countries != null)
             {
@@ -78,6 +79,7 @@ namespace Blazor.FormSample.Web.Services
         public async Task AddBookingAsync(VacationBookingDto booking)
         {
             using var db = await _dbFactory.Create<SampleDbContext>();
+            Console.WriteLine(JsonSerializer.Serialize(booking));
             db.Bookings.Add(booking);
             await db.SaveChanges();
         }
@@ -93,6 +95,18 @@ namespace Blazor.FormSample.Web.Services
         {
             using var db = await _dbFactory.Create<SampleDbContext>();
             return db.Bookings.ToList();
+        }
+
+        public async Task<VacationBookingDto> GetBookingAsync(Guid id)
+        {
+            using var db = await _dbFactory.Create<SampleDbContext>();
+            return db.Bookings.FirstOrDefault(b => b.Id == id);
+        }
+
+        public async Task<bool> PersonAlreadyExists(string name)
+        {
+            using var db = await _dbFactory.Create<SampleDbContext>();
+            return db.Bookings.Any(b => b.Person.FirstName == name);
         }
     }
 }

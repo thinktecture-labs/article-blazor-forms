@@ -7,7 +7,7 @@
         <FluentValidator/>
         <div class="section"><span>1</span>Persönliche Daten:</div>
         <div class="inner-wrap">
-            <label>Vorname: <InputText id="firstName" @bind-Value="Model.Person.FirstName"/></label>
+            <label>Vorname: <InputText id="firstName" @bind-Value="Model.Person.FirstName" /></label>
             <ValidationMessage For="() => Model.Person.FirstName"/>
             <label>Nachname: <InputText @bind-Value="Model.Person.LastName"/></label>
             <ValidationMessage For="() => Model.Person.LastName"/>
