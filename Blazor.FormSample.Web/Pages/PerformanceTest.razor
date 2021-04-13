@@ -1,6 +1,35 @@
 @page "/performance"
 @if (Country != null)
 {
+    <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+        <MudTabPanel Text="ShouldRender" OnClick="() => _enablePerformance = false">
+            <EditForm Model="Country">
+            </EditForm>
+        </MudTabPanel>
+        <MudTabPanel Text="Vituralize" OnClick="() => _enablePerformance = false">
+            <MudContainer Style="max-height: 100vh; overflow-y: scroll">
+                @if (!_enablePerformance)
+                {
+                    @foreach (var airport in Country.Airports)
+                    {
+                        <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Airport Name"/>
+                    }
+                }
+                else
+                {
+                    <Virtualize Items="@Country.Airports" OverscanCount="10" Context="airport">
+                        <ItemContent>
+                            <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Airport Name"/>
+                        </ItemContent>
+                        <Placeholder>
+                            <Spinner></Spinner>
+                        </Placeholder>
+                    </Virtualize>
+                }
+            </MudContainer>
+        </MudTabPanel>
+    </MudTabs>
+
     <div class="btn-action">
         @if (_enablePerformance)
         {
@@ -10,34 +39,5 @@
         {
             <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.PowerOff" OnClick="@(() => _enablePerformance = true)"/>
         }
-    </div>
-
-    <div class="wrapper">
-        @*@if (_enablePerformance)
-        {
-            <div class="test">
-                <MudContainer Style="max-height: 100vh; overflow-y: scroll">
-                    <Virtualize Items="@Country.Airports" OverscanCount="10" Context="airport">
-                        <ItemContent>
-                            <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Input"/>
-                        </ItemContent>
-                        <Placeholder>
-                            <Spinner></Spinner>
-                        </Placeholder>
-                    </Virtualize>
-                </MudContainer>
-            </div>
-        }
-        else
-        {*@
-        <div class="test">
-            <EditForm Model="Country">
-                @foreach (var airport in Country.Airports)
-                {
-                    <PerfInputText Label="Airport" @key="airport.Id" EnablePerformanceBoost="_enablePerformance" @bind-Value="airport.Name" ValidationFor="@(() => airport.Name)"/>
-                }
-            </EditForm>
-        </div>
-        @*}*@
     </div>
 }
