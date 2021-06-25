@@ -26,7 +26,6 @@ namespace Blazor.FormSample.Web
             // builder.Services.AddScoped<IFormsService, FormsService>();
             builder.Services.AddScoped<BookingService>();
             builder.Services.AddScoped<IIndexedDbFactory, IndexedDbFactory>();
-            builder.Services.AddValidatorsFromAssemblyContaining<Program>();
             builder.Services.AddMudServices();
             builder.Services.AddMudBlazorDialog();
             builder.Services.AddMudBlazorResizeListener();
