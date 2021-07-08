@@ -25,7 +25,15 @@ namespace Blazor.FormSample.Web.Components.Performance
 
         protected override void OnAfterRender(bool firstRender)
         {
-            Console.WriteLine("OnAfterRender called...");
+            if (firstRender)
+            {
+                Console.WriteLine("OnAfterRender triggered by firstRender");
+            }
+            else
+            {
+                Console.WriteLine("OnAfterRender triggered by ShouldRender()");
+            }
+
             base.OnAfterRender(firstRender);
         }
 

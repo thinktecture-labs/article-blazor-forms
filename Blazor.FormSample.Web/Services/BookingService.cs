@@ -103,10 +103,10 @@ namespace Blazor.FormSample.Web.Services
             return db.Bookings.FirstOrDefault(b => b.Id == id);
         }
 
-        public async Task<bool> PersonAlreadyExists(string name)
+        /*public async Task<bool> PersonAlreadyExists(string name)
         {
             using var db = await _dbFactory.Create<SampleDbContext>();
             return db.Bookings.Any(b => b.Person.FirstName == name);
-        }
+        }*/
     }
 }

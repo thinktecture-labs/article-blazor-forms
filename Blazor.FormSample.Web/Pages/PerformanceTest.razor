@@ -1,43 +1,48 @@
 @page "/performance"
-@if (Country != null)
+@if (_country != null)
 {
     <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
-        <MudTabPanel Text="ShouldRender" OnClick="() => _enablePerformance = false">
-            <EditForm Model="Country">
+        <MudTabPanel Text="ShouldRender" OnClick="() => _tabIndex = 0">
+            <EditForm Model="_country">
+                @foreach (var airport in _country.Airports)
+                {
+                    <PerfInputText T="string" @key="airport.Id" @bind-Value="@airport.Name" EnablePerformanceBoost="_enablePerformance" Label="Airport Name"/>
+                }
             </EditForm>
         </MudTabPanel>
-        <MudTabPanel Text="Vituralize" OnClick="() => _enablePerformance = false">
-            <MudContainer Style="max-height: 100vh; overflow-y: scroll">
-                @if (!_enablePerformance)
-                {
-                    @foreach (var airport in Country.Airports)
-                    {
-                        <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Airport Name"/>
-                    }
-                }
-                else
-                {
-                    <Virtualize Items="@Country.Airports" OverscanCount="10" Context="airport">
-                        <ItemContent>
+        <MudTabPanel Text="Virtualize" OnClick="() => _tabIndex = 1">
+            <MudContainer Style="max-height: 100vh; overflow-y: scroll; padding: 16px;">
+                <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+                    <MudTabPanel Text="foreach">
+                        @foreach (var airport in _country.Airports)
+                        {
                             <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Airport Name"/>
-                        </ItemContent>
-                        <Placeholder>
-                            <Spinner></Spinner>
-                        </Placeholder>
-                    </Virtualize>
-                }
+                        }
+                    </MudTabPanel>
+                    <MudTabPanel Text="Virtualize">
+                        <Virtualize Items="@_country.Airports" Context="airport">
+                            <ItemContent>
+                                <MudTextField T="string" @key="airport.Id" @bind-Value="@airport.Name" Label="Airport Name"/>
+                            </ItemContent>
+                        </Virtualize>
+                    </MudTabPanel>
+                </MudTabs>
             </MudContainer>
         </MudTabPanel>
     </MudTabs>
 
-    <div class="btn-action">
-        @if (_enablePerformance)
-        {
-            <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Power" OnClick="@(() => _enablePerformance = false)"/>
-        }
-        else
-        {
-            <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.PowerOff" OnClick="@(() => _enablePerformance = true)"/>
-        }
-    </div>
+
+    @if (_tabIndex == 0)
+    {
+        <div class="btn-action">
+            @if (_enablePerformance)
+            {
+                <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Power" OnClick="@(() => _enablePerformance = false)"/>
+            }
+            else
+            {
+                <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.PowerOff" OnClick="@(() => _enablePerformance = true)"/>
+            }
+        </div>
+    }
 }

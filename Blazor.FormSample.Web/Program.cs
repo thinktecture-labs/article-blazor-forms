@@ -23,7 +23,7 @@ namespace Blazor.FormSample.Web
                 sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
             builder.Services.AddLocalization();
             builder.Services.AddScoped<IFormsService, MudFormsService>();
-            // builder.Services.AddScoped<IFormsService, FormsService>();
+            builder.Services.AddScoped<IFormsService, FormsService>();
             builder.Services.AddScoped<BookingService>();
             builder.Services.AddScoped<IIndexedDbFactory, IndexedDbFactory>();
             builder.Services.AddMudServices();

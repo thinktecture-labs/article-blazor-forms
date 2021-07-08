@@ -9,7 +9,6 @@ namespace Blazor.FormSample.Web.Pages
 {
     public partial class Booking
     {
-        private bool UseMudBlazor { get; set; }
         private VacationBookingDto _vacationBooking = new();
 
         [Parameter] public string Id { get; set; }

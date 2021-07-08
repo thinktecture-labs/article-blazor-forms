@@ -16,21 +16,9 @@ namespace Blazor.FormSample.Web.Components
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Parameter] public VacationBookingDto Model { get; set; }
 
-        private EditForm _editForm;
-
         protected override async Task OnInitializedAsync()
         {
             await BookingService.InitializeDbASync();
-            if (_editForm?.EditContext != null)
-            {
-                _editForm.EditContext.OnFieldChanged += (sender, args) =>
-                {
-                    if (args.FieldIdentifier.FieldName == nameof(VacationBookingDto.OnlyOutboundFlight))
-                    {
-                        Model.EndVacationDate = null;
-                    }
-                };
-            }
         }
 
         private async Task Submit(EditContext context)
